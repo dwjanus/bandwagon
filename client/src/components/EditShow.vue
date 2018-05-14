@@ -1,0 +1,73 @@
+<template>
+  <div class="shows">
+    <h1>Edit Show</h1>
+      <div class="form">
+        <div>
+          <input type="text" name="venue" placeholder="VENUE" v-model="venue">
+        </div>
+        <div>
+          <input type="text" placeholder="DATE" v-model="date">
+        </div>
+        <div>
+          <button class="app_show_btn" @click="updateShow">Update</button>
+        </div>
+      </div>
+  </div>
+</template>
+
+<script>
+import ShowsService from '@/services/ShowsServices'
+
+export default {
+  name: 'EditShow',
+  data () {
+    return {
+      venue: '',
+      date: ''
+    }
+  },
+  mounted () {
+    this.getShow()
+  },
+  methods: {
+    async getShow () {
+      const response = await ShowsService.getShow({
+        id: this.$route.params.id
+      })
+      this.venue = response.data.venue
+      this.date = response.data.date
+    },
+    async updateShow () {
+      await ShowsService.updateShow({
+        id: this.$route.params.id,
+        venue: this.venue,
+        date: this.date
+      })
+      this.$router.push({ name: 'Shows' })
+    }
+  }
+}
+</script>
+<style type="text/css">
+.form input, .form textarea {
+  width: 500px;
+  padding: 10px;
+  border: 1px solid #e0dede;
+  outline: none;
+  font-size: 12px;
+}
+.form div {
+  margin: 20px;
+}
+.app_show_btn {
+  background: #4d7ef7;
+  color: #fff;
+  padding: 10px 80px;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: bold;
+  width: 520px;
+  border: none;
+  cursor: pointer;
+}
+</style>
