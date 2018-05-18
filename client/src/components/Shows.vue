@@ -1,5 +1,5 @@
 <template>
-  <div class="shows">
+  <div class="shows" is="sui-container">
     <h1>Shows</h1>
 
     <div v-if="shows.length > 0" class="table-wrap">
@@ -15,8 +15,9 @@
         </tr>
 
         <tr v-for="show in shows" :key="show.venue">
-          <td>{{ show.venue }}</td>
           <td>{{ show.date }}</td>
+          <td>{{ show.location.city }}</td>
+          <td>{{ show.venue.name }}</td>
           <td align="center">
             <router-link v-bind:to="{ name: 'EditShow', params: { id: show._id } }">Edit</router-link>
             <a href="" @click="deleteShow(show._id)">Delete</a>

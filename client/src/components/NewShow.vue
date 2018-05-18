@@ -1,37 +1,90 @@
 <template>
-  <div class="shows">
-    <h1>Add Show</h1>
+  <div class="new_show" is="sui-container">
+    <h1 class="ui dividing header">Add Show</h1>
 
-    <div class="form">
-      <div>
-        <input type="text" name="venue" placeholder="VENUE" v-model="venue">
+    <sui-form>
+      <sui-form-field>
+        <label>Date</label>
+        <input type="date" name="date" v-model="date">
+      </sui-form-field>
+
+      <div class="two fields">
+        <sui-form-field>
+          <label>City</label>
+          <input type="text" name="city" placeholder="City" v-model="city">
+        </sui-form-field>
+
+        <div class="field">
+          <label>State</label>
+          <StatesDropdown />
+        </div>
       </div>
 
-      <div>
-        <input type="text" name="date" placeholder="DATE" v-model="date">
-      </div>
+      <sui-form-field>
+        <input type="string" name="venue_name" v-model="venue_name">
+      </sui-form-field>
 
-      <button class="new_show_btn" @click="addShow">Add</button>
-    </div>
+      <sui-form-field>
+        <input type="string" name="address" v-model="address">
+      </sui-form-field>
+
+      <sui-form-field>
+        <input type="string" name="address" v-model="address">
+      </sui-form-field>
+
+      <sui-form-field>
+        <input type="string" name="address" v-model="address">
+      </sui-form-field>
+
+      <sui-form-field>
+        <input type="string" name="bands" v-model="bands">
+      </sui-form-field>
+
+      <sui-button basic primary class="new_show_btn" @click="addShow">Add</sui-button>
+    </sui-form>
   </div>
 </template>
 
 <script>
 import ShowsService from '@/services/ShowsServices'
+import StatesDropdown from './StatesDropdown'
 
 export default {
   name: 'NewShow',
+  components: {
+    StatesDropdown
+  },
   data () {
     return {
-      venue: '',
-      date: ''
+      date: '',
+      location: {
+        city: '',
+        state: ''
+      },
+      venue: {
+        name: '',
+        address: ''
+      },
+      bands: '',
+      description: '',
+      link: ''
     }
   },
   methods: {
     async addShow () {
       await ShowsService.addShow({
-        venue: this.venue,
-        date: this.date
+        date: this.date,
+        location: {
+          city: this.city,
+          state: this.state
+        },
+        venue: {
+          name: this.venue_name,
+          address: this.address
+        },
+        bands: this.bands,
+        description: this.description,
+        link: this.link
       })
 
       this.$router.push({ name: 'Shows' })
@@ -40,7 +93,7 @@ export default {
 }
 </script>
 
-<style type="text/css">
+<!-- <style type="text/css">
 .form input, .form textarea {
   width: 500px;
   padding: 10px;
@@ -62,4 +115,4 @@ export default {
   border: none;
   cursor: pointer;
 }
-</style>
+</style> -->
