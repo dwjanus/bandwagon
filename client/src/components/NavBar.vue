@@ -7,8 +7,8 @@
         :active="isActive(item)"
         :key="item"
         :content="item"
-        :to="item"
-        @click="select(item)"
+        :to="item.toLowerCase()"
+        @click.prevent="select(item)"
       />
 
       <sui-menu-menu position="right">
@@ -23,11 +23,11 @@
 
 <script>
 export default {
-  name: 'TopMenu',
+  name: 'NavBar',
   data () {
     return {
-      active: 'Shows',
-      items: ['Shows', 'Tours', 'Contacts']
+      active: '',
+      items: ['Home', 'Shows', 'Tours', 'Contacts']
     }
   },
   methods: {

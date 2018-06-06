@@ -1,5 +1,5 @@
 <template>
-  <sui-dropdown
+  <sui-dropdown class="fluid"
     :options="states"
     placeholder="State"
     search

@@ -1,18 +1,17 @@
 <template>
   <div id="app">
-    <topmenu />
-    <router-view/>
+    <app-navbar />
+    <router-view />
   </div>
 </template>
 
 <script>
-import topmenu from '@/components/TopMenu'
+import NavBar from '@/components/NavBar'
 
 export default {
-  name: 'App',
+  name: 'app',
   components: {
-    topmenu
+    'app-navbar': NavBar
   }
 }
 </script>
-
