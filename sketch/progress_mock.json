@@ -1,6 +1,6 @@
 {
-	25%,
-	70%,
-	80%,
-	85%
+	Rochester: 25,
+	Boston: 70,
+	Pittsburgh: 80,
+	Portland: 85
 }
